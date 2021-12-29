@@ -1,11 +1,7 @@
-const info = (...params: any[]) => {
+export const info = (...params: any[]) => {
 	console.log(...params);
 };
 
-const error = (...params: any[]) => {
+export const error = (...params: any[]) => {
 	console.error(...params);
-};
-
-module.exports = {
-	info, error
 };

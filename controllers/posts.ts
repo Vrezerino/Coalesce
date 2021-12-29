@@ -1,5 +1,5 @@
 const postsRouter = require('express').Router();
-import Post from '../models/post';
+const Post = require( '../models/post');
 import * as config from '../utils/config';
 
 import { PostType, NewPostType } from '../types'
