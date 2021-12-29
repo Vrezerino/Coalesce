@@ -1,0 +1,44 @@
+.post {
+	background-color: rgba(255, 253, 253, 0.904);
+	margin-bottom: 3px;
+	padding: 4px;
+	border: 1px dotted #047e00;
+	border-radius: 3px;
+	word-wrap: break-word;
+}
+
+.post .poster {
+	padding: 1px;
+	background-color: rgb(255, 179, 64);
+	border-radius: 3px;
+	box-shadow: 1px 2px 1px rgb(216, 94, 73);
+}
+
+.post .admin {
+	padding: 0px;
+	background-color: rgb(233, 135, 96);
+	border-radius: 3px;
+	box-shadow: 1px 2px 1px rgb(117, 37, 37);
+}
+
+.post .content {
+	padding: 7px;
+	text-overflow: clip;
+}
+
+.postDate, .postNumber {
+	font-size: 80%;
+}
+
+.postTitle {
+	padding: 7px;
+	color: rgb(116, 0, 0);
+	font-weight: bold;
+}
+
+.postNumber {
+	font-style: italic;
+	font-weight: bold;
+	float: right;
+	margin: 4px 4px 0px 0px;
+}

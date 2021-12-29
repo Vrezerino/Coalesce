@@ -1,0 +1,60 @@
+.postFormContainer {
+	color: black;
+	margin: 0 auto;
+	width: 50%;
+	z-index: 2;
+}
+
+.bubblePostForm {
+	bottom: 20px;
+	position: absolute;
+	width: 40%;
+	left: 30%;
+}
+
+.suggestion {
+	color:black;
+	font-size: small;
+	font-weight: normal;
+}
+
+.form {
+	background-color: rgba(255, 199, 95, 0.904);
+	padding: 0px;
+	border: 1px dotted #ffffff;
+	border-radius: 6px;
+	text-align: center;
+	width: 100%;
+}
+
+form, input, textarea {
+	font-size: 12px;
+}
+
+input {
+	width: 98%;
+}
+
+.form button {
+	color: rgb(80, 0, 0);
+}
+
+textarea {
+	text-align: left;
+	width: 98%;
+	height: 100px;
+	min-width: 35%;
+	min-height: 85%;
+}
+
+.contentLength {
+	color: black;
+}
+
+.serverMessage {
+	color: red;
+	margin: 0;
+	padding: 0;
+	font-size: medium;
+	text-shadow: black 1px 1px;
+}

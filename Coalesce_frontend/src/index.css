@@ -1,0 +1,16 @@
+body {
+	background-color: black;
+  margin: 1px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	font-size: 16px;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+}
+
+body, input, textarea, button {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}

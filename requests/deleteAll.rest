@@ -1,0 +1,1 @@
+DELETE https://coalesceforum.herokuapp.com/api/posts

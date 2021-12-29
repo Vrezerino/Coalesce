@@ -1,0 +1,28 @@
+.closeBtn {
+	float: right;
+	margin: 7px 6px 0px 0px;
+	border-radius: 7px;
+}
+
+.replies {
+	color: black;
+	width: 90%;
+	left: 5%;
+	top: 5%;
+	z-index: 1;
+	display: block; 
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+}
+
+.empty {
+	color: white
+}
+
+footer {
+	width: 100%;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	display: inline-block;
+}
