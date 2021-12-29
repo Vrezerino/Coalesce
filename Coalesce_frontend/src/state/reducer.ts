@@ -155,7 +155,6 @@ export const reducer = (state: State, action: Action): State => {
 				}
 			};
 		case 'SET_BUBBLES':
-			console.log('bubbles set');
 			return {
 				...state,
 				bubbles: [...action.payload]
