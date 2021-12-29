@@ -16,8 +16,11 @@ class BubbleContainer extends React.Component<{ bubbles: PostType[] }> {
 	constructor(props: { bubbles: PostType[] }) {
 		super(props);
 	}
-	shouldComponentUpdate(nextProps: { bubbles: PostType[]; }) {
-		return this.props.bubbles != nextProps.bubbles;
+	shouldComponentUpdate(nextProps: { bubbles: PostType[]; }, nextState: any) {
+		console.log(this.props.bubbles);
+		console.log(nextProps.bubbles);
+		console.log(this.props.bubbles !== (nextProps.bubbles && nextState));
+		return (this.props.bubbles !== (nextProps.bubbles && nextState));
 	}
 	// Each bubble is rendered with a delay, one after another, using the index number.
 	render() {

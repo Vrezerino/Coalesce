@@ -81,7 +81,7 @@ const PostForm = () => {
 								<td>
 									<input value={poster}
 										onChange={({ target }) =>
-											setPoster(target.value)}
+											dispatch(setPoster(target.value))}
 										placeholder="Name (optional)" />
 								</td>
 							</tr>
@@ -90,7 +90,7 @@ const PostForm = () => {
 									<td>
 										<input value={title}
 											onChange={({ target }) =>
-												setTitle(target.value)}
+												dispatch(setTitle(target.value))}
 											placeholder="Title (optional)" />
 									</td>
 								</tr>
