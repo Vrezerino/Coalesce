@@ -46,6 +46,6 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 		<StateContext.Provider value={[state, dispatch]}>
 			{children}
 		</StateContext.Provider>
-  );
+	);
 };
 export const useStateValue = () => useContext(StateContext);

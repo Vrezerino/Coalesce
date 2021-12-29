@@ -1,19 +1,21 @@
-import * as config from './utils/config';
-import express from 'express';
-const app = express();
-//import morgan from 'morgan';
-import cors from 'cors';
-import postsRouter from './controllers/posts';
-import * as middleware from './utils/middleware';
-import * as logger from './utils/logger';
-import mongoose from 'mongoose';
-mongoose.set('debug', true);
+const config = require('./utils/config')
+const express = require('express')
+const app = express()
+const morgan = require('morgan')
+const cors = require('cors')
+const postsRouter = require('./controllers/posts')
+const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
+const mongoose = require('mongoose')
+mongoose.set('debug', true)
 
-logger.info('Connecting to', config.DB_URI);
+logger.info('Connecting to', config.DB_URI)
+
+logger.info('Connecting to', config.DB_URI!);
 //morgan.token('body', (req) => JSON.stringify(req.body));
 //morgan.token('id', (req) => req.iq);
 
-mongoose.connect(config.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(config.DB_URI!, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 	.then(() => {
 		logger.info('Connected to MongoDB!');
 	})

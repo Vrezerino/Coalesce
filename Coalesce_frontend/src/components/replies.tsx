@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './replies.css';
 import PostForm from './postForm';
 
-import { useStateValue } from '../state'
+import { useStateValue } from '../state';
 
 interface Props {
 	onClose(): void;
@@ -14,6 +14,7 @@ const Replies = (props: Props) => {
 	const replyContainer = React.useRef<HTMLDivElement>(null);
 	const [{ currentBubble, replies }] = useStateValue();
 
+	/* eslint-disable */
 	return ReactDOM.createPortal(
 		<div className="replies" ref={replyContainer}>
 			{currentBubble &&

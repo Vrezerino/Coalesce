@@ -5,7 +5,7 @@ import { PostType } from '../../types';
 //const pop = require('../utils/pop').sound
 
 import { useStateValue } from '../../state';
-import { setCurrentBubble, setReplies } from '../../state';
+import { setCurrentBubble, setReplies, setNotification } from '../../state';
 
 interface Props {
 	bubbleObj: PostType;
@@ -46,7 +46,10 @@ const Bubble = (props: Props) => {
 
 			if (replyPostNumbers.length !== 0) {
 				postService.getReplies(props.bubbleObj.replies)
-					.then(r => dispatch(setReplies(Array.from(r))));
+					.then(r => dispatch(setReplies(Array.from(r))))
+					.catch(e => {
+						dispatch(setNotification(e.message));
+					});
 			} else {
 				dispatch(setReplies([]));
 			}
@@ -67,7 +70,7 @@ const Bubble = (props: Props) => {
 		return <div ref={bubbleRef}></div>;
 	} else {
 		return (
-			<div 
+			<div
 				ref={bubbleRef}
 				className={!props.admin ? 'ball bubble' : 'ball bubble admin'}
 				id={props.postNumber.toString()}

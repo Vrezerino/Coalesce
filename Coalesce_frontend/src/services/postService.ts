@@ -18,10 +18,12 @@ const getReplies = async (array: Array<number>) => {
 	return response.data;
 };
 
+/* eslint-disable */
 const postPost = async (bubblePostNum: number | null, post: NewPostType) => {
 	const response = await axios.post(url + '/' + bubblePostNum, post);
 	return response.data;
 };
+/* eslint enable */
 
 const exportedObject = { getAll, getBubbles, getReplies, postPost };
 

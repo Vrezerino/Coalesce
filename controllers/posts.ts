@@ -1,9 +1,8 @@
 const postsRouter = require('express').Router();
-const Post = require( '../models/post');
+const Post = require('../models/post');
 import * as config from '../utils/config';
 
 import { PostType, NewPostType } from '../types'
-import { AnyKeys, AnyObject } from 'mongoose';
 
 postsRouter.get('/', async (
 	_req: any,
@@ -13,7 +12,7 @@ postsRouter.get('/', async (
 	next: (arg0: any) => void) => {
 	try {
 		const all = await Post.find({});
-		res.json(all.map(p => p.toJSON()));
+		res.json(all.map((p: { toJSON: () => PostType; }) => p.toJSON()));
 	} catch (e) {
 		next(e);
 	}
@@ -37,14 +36,14 @@ postsRouter.get('/id/:postNumber', ( // Types largely inferred from usage in thi
 		};
 	},
 	next: (arg0: any) => any) => {
-	Post.findOne({ postNumber: parseInt(req.params.postNumber) }).then(post => {
+	Post.findOne({ postNumber: parseInt(req.params.postNumber) }).then((post: PostType) => {
 		if (post) {
 			res.json(post);
 		} else {
 			res.status(404).send('404');
 		}
 	})
-		.catch(e => next(e));
+		.catch((e: any) => next(e));
 });
 
 // Bubbles are thread starters a.k.a original posters. 
@@ -55,7 +54,7 @@ postsRouter.get('/bubbles', async (
 	}, next: (arg0: any) => void) => {
 	try {
 		const allOPs = await Post.find({ OP: true }).exec();
-		res.json(allOPs.map(p => p.toJSON()));
+		res.json(allOPs.map((p: { toJSON: () => PostType; }) => p.toJSON()));
 	} catch (e) {
 		next(e);
 	}
@@ -74,11 +73,11 @@ postsRouter.get('/replies', async (
 	next: (arg0: any) => void) => {
 	try {
 		// Avoiding possible null reply postnumbers.
-		const array = req.query.array.flatMap(pnString => pnString === undefined || pnString === null
+		const array = req.query.array.flatMap(pnString => pnString == null
 			? []
 			: parseInt(pnString));
 		const replies = await Post.find().where('postNumber').in(array).exec();
-		res.json(replies.map(reply => reply.toJSON()));
+		res.json(replies.map((reply: { toJSON: () => PostType; }) => reply.toJSON()));
 	} catch (e) {
 		next(e);
 	}
@@ -109,13 +108,13 @@ postsRouter.post('/:postNumber', async (
 	const post = new Post({
 		...req.body,
 		poster: req.body.poster
-			? (req.body.poster.includes(config.AP) // A secret typed into the poster field 
-				? req.body.poster.replace(config.AP, '')
+			? (req.body.poster.includes(config.AP!) // A secret typed into the poster field 
+				? req.body.poster.replace(config.AP!, '')
 				: req.body.poster)
 			: 'NoNamer',
 		date: postDate,
 		IP: req.socket.remoteAddress,
-		admin: req.body.poster.includes(config.AP) ? true : false
+		admin: req.body.poster.includes(config.AP!) ? true : false
 	});
 	try {
 		/*
@@ -129,37 +128,10 @@ postsRouter.post('/:postNumber', async (
 				{ postNumber: req.params.postNumber },
 				{ $push: { replies: savedPost.postNumber } });
 		}
-		/*
-		New post is broadcasted to everyone using changeStream, therefore sending it back to 
-		the poster in the HTTP response is redundant. Status code alone suffices.
-		*/
 		res.status(201).send(JSON.stringify(savedPost));
 	} catch (e) {
 		next(e);
 	}
 });
 
-// For development only.
-postsRouter.delete('/', async (
-	_req: any,
-	res: {
-		status: (arg0: number) => {
-			(): any;
-			new(): any;
-			end: {
-				(): void;
-				new():
-					any;
-			};
-		};
-	},
-	next: (arg0: any) => void) => {
-	try {
-		await Post.deleteMany({ postNumber: { $gt: 1 } });
-		res.status(200).end();
-	} catch (e) {
-		next(e);
-	}
-});
-
-export default postsRouter;
+module.exports = postsRouter;

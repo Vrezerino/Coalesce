@@ -5,9 +5,18 @@ import { NewPostType } from '../types';
 
 import { useStateValue } from '../state';
 import { setPoster, setTitle, setContent, setContentLength, setNotification } from '../state';
+import axios, { AxiosError } from 'axios';
 
 const PostForm = () => {
-	const [{ poster, content, title, contentLength, notification, currentBubble }, dispatch] = useStateValue()
+	const [{
+		poster,
+		content,
+		title,
+		contentLength,
+		notification,
+		currentBubble },
+	dispatch
+	] = useStateValue();
 
 	const bubblePostNum = currentBubble != null
 		? currentBubble.postNumber
@@ -34,11 +43,13 @@ const PostForm = () => {
 				dispatch(setTitle(''));
 				dispatch(setContentLength(0));
 			})
-			.catch(e => {
-				if (e.response) {
+			.catch((e: Error | AxiosError) => {
+				if (axios.isAxiosError(e) && e.response) {
 					dispatch(setNotification(e.response.data.toString()));
-				} else if (e.request) {
+				} else if (axios.isAxiosError(e) && e.request) {
 					dispatch(setNotification('Server didn\'t respond.'));
+				} else {
+					dispatch(setNotification(e.message));
 				}
 			});
 	};

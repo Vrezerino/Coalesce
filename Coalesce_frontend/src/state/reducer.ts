@@ -65,6 +65,7 @@ export const removeCurrentBubble = () => {
 };
 
 export const setBubbles = (bubbles: PostType[]) => {
+	console.log('set b');
 	return {
 		type: 'SET_BUBBLES',
 		payload: bubbles
@@ -75,7 +76,7 @@ export const addBubble = (bubble: PostType) => {
 	return {
 		type: 'ADD_BUBBLE',
 		payload: bubble
-	} as Action
+	} as Action;
 };
 
 export const setReplies = (replies: PostType[]) => {
@@ -89,51 +90,52 @@ export const addReplies = (replies: PostType[]) => {
 	return {
 		type: 'ADD_REPLIES',
 		payload: replies
-	} as Action
-}
+	} as Action;
+};
 
 export const setTitle = (title: string) => {
 	return {
 		type: 'SET_TITLE',
 		payload: title
-	} as Action
-}
+	} as Action;
+};
 
 export const setPoster = (poster: string) => {
 	return {
 		type: 'SET_POSTER',
 		payload: poster
-	} as Action
-}
+	} as Action;
+};
 
 export const setContent = (content: string) => {
 	return {
 		type: 'SET_CONTENT',
 		payload: content
-	} as Action
-}
+	} as Action;
+};
 
 export const setContentLength = (contentLength: number) => {
 	return {
 		type: 'SET_CONTENT_LENGTH',
 		payload: contentLength
-	} as Action
-}
+	} as Action;
+};
 
 export const setNotification = (notif: string) => {
 	return {
 		type: 'SET_NOTIFICATION',
 		payload: notif
-	} as Action
-}
+	} as Action;
+};
 
 export const setClient = (client: Socket) => {
 	return {
 		type: 'SET_CLIENT',
 		payload: client
-	} as Action
-}
+	} as Action;
+};
 
+/* eslint-disable */
 export const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
 		case 'SET_CURRENT_BUBBLE':
@@ -145,7 +147,7 @@ export const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				currentBubble: null
-			}
+			};
 		case 'SET_REPLIES':
 			return {
 				...state,
@@ -156,7 +158,7 @@ export const reducer = (state: State, action: Action): State => {
 		case 'SET_BUBBLES':
 			return {
 				...state,
-				bubbles: action.payload
+				bubbles: [...action.payload]
 			};
 		case 'ADD_BUBBLE':
 			return {
@@ -201,8 +203,9 @@ export const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				client: action.payload
-			}
+			};
 		default:
 			return state;
 	}
 };
+/* eslint-enable */

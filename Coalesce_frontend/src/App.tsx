@@ -6,12 +6,12 @@ import PostForm from './components/postForm';
 import { io } from 'socket.io-client';
 
 import { useStateValue } from './state';
-import { setBubbles, removeCurrentBubble, addBubble, addReplies } from './state'
+import { setBubbles, removeCurrentBubble, addBubble, addReplies } from './state';
 
 const socket = io();
 
 const App = () => {
-	const [{ currentBubble }, dispatch] = useStateValue()
+	const [{ currentBubble }, dispatch] = useStateValue();
 
 	React.useEffect(() => {
 		const fetchBubbles = async () => {
@@ -25,9 +25,9 @@ const App = () => {
 		//
 	});
 
-	socket.onAny((event) => {
+	/* eslint-disable */
+	socket.onAny((event: any) => {
 		const msgJSON = JSON.parse(event);
-		// eslint-disable-next-line prefer-const
 		let { IP, ...newPost } = msgJSON; // remove IP field 
 		newPost = { ...newPost, id: msgJSON._id };
 		if (newPost.OP) {
@@ -36,6 +36,7 @@ const App = () => {
 			dispatch(addReplies(newPost));
 		}
 	});
+	/* eslint-enable */
 
 	socket.on('disconnect', (reason) => {
 		if (reason === 'io server disconnect') {
@@ -46,11 +47,10 @@ const App = () => {
 	return (
 		<>
 			<BubbleContainer />
-			<Replies
-				onClose={() => {
-					dispatch(removeCurrentBubble());
-					socket.send(0);
-				}} />
+			<Replies onClose={() => {
+				dispatch(removeCurrentBubble());
+				socket.send(0);
+			}} />
 			{!currentBubble && <PostForm />}
 		</>
 	);

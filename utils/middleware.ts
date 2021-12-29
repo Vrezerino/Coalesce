@@ -1,12 +1,12 @@
 import * as logger from './logger';
-import uuid from 'node-uuid';
+const uuid = require('node-uuid');
 
-export const unknownEndpoint = (_request, response, next) => {
+export const unknownEndpoint = (_request: any, response: any, next: any) => {
 	response.status(404).send({ error: 'unknown endpoint' });
 	next();
 };
 
-export const errorHandler = (error, _request, response, next) => {
+export const errorHandler = (error: any, _request: any, response: any, next: any) => {
 	logger.error(error.message);
 
 	if (error.name === 'CastError') {
