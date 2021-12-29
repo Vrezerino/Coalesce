@@ -31,34 +31,36 @@ const Bubble = (props: Props) => {
 	}, props.wait);
 
 	React.useEffect(() => {
-		bubbleDiv.addEventListener('mouseover', () => {
-			bubbleDiv.style.width = '92px';
-			bubbleDiv.style.height = '92px';
-		});
+		if (bubbleDiv) {
+			bubbleDiv.addEventListener('mouseover', () => {
+				bubbleDiv.style.width = '92px';
+				bubbleDiv.style.height = '92px';
+			});
 
-		bubbleDiv.addEventListener('click', () => {
-			/*
-			Signal the server that the bubble has been opened,
-			then get its replies.
-			*/
-			dispatch(setCurrentBubble(props.bubbleObj));
-			client?.send(props.bubbleObj.postNumber);
+			bubbleDiv.addEventListener('click', () => {
+				/*
+				* Signal the server that a bubble (thread) has been opened,
+				* then get its replies.
+				*/
+				dispatch(setCurrentBubble(props.bubbleObj));
+				client?.send(props.bubbleObj.postNumber);
 
-			if (replyPostNumbers.length !== 0) {
-				postService.getReplies(props.bubbleObj.replies)
-					.then(r => dispatch(setReplies(Array.from(r))))
-					.catch(e => {
-						dispatch(setNotification(e.message));
-					});
-			} else {
-				dispatch(setReplies([]));
-			}
-		});
+				if (replyPostNumbers.length !== 0) {
+					postService.getReplies(props.bubbleObj.replies)
+						.then(r => dispatch(setReplies(Array.from(r))))
+						.catch(e => {
+							dispatch(setNotification(e.message));
+						});
+				} else {
+					dispatch(setReplies([]));
+				}
+			});
 
-		bubbleDiv.addEventListener('mouseout', () => {
-			bubbleDiv.style.width = '90px';
-			bubbleDiv.style.height = '90px';
-		});
+			bubbleDiv.addEventListener('mouseout', () => {
+				bubbleDiv.style.width = '90px';
+				bubbleDiv.style.height = '90px';
+			});
+		}
 	}, [props, replyPostNumbers]);
 
 	const position = {

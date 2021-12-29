@@ -65,7 +65,6 @@ export const removeCurrentBubble = () => {
 };
 
 export const setBubbles = (bubbles: PostType[]) => {
-	console.log('set b');
 	return {
 		type: 'SET_BUBBLES',
 		payload: bubbles
@@ -156,6 +155,7 @@ export const reducer = (state: State, action: Action): State => {
 				}
 			};
 		case 'SET_BUBBLES':
+			console.log('bubbles set');
 			return {
 				...state,
 				bubbles: [...action.payload]
