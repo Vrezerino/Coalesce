@@ -1,6 +1,6 @@
 const postsRouter = require('express').Router();
 import Post from '../models/post';
-import config from '../utils/config';
+import * as config from '../utils/config';
 
 import { PostType, NewPostType } from '../types'
 import { AnyKeys, AnyObject } from 'mongoose';

@@ -1,11 +1,11 @@
-import config from './utils/config';
+import * as config from './utils/config';
 import express from 'express';
 const app = express();
 //import morgan from 'morgan';
 import cors from 'cors';
 import postsRouter from './controllers/posts';
-import middleware from './utils/middleware';
-import logger from './utils/logger';
+import * as middleware from './utils/middleware';
+import * as logger from './utils/logger';
 import mongoose from 'mongoose';
 mongoose.set('debug', true);
 

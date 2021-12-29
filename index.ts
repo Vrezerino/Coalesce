@@ -2,8 +2,8 @@
 const app = require('./app').app;
 const mongoose = require('./app').mongoose;
 import http from 'http';
-import config from './utils/config';
-import logger from './utils/logger';
+import * as config from './utils/config';
+import * as logger from './utils/logger';
 
 import { PostType, NewPostType } from './types';
 
