@@ -23,8 +23,8 @@ export type Action =
 		payload: PostType[];
 	}
 	| {
-		type: 'ADD_REPLIES';
-		payload: PostType[];
+		type: 'ADD_REPLY';
+		payload: PostType;
 	}
 	| {
 		type: 'SET_TITLE';
@@ -85,10 +85,10 @@ export const setReplies = (replies: PostType[]) => {
 	} as Action;
 };
 
-export const addReplies = (replies: PostType[]) => {
+export const addReply = (reply: PostType) => {
 	return {
-		type: 'ADD_REPLIES',
-		payload: replies
+		type: 'ADD_REPLY',
+		payload: reply
 	} as Action;
 };
 
@@ -148,13 +148,15 @@ export const reducer = (state: State, action: Action): State => {
 				currentBubble: null
 			};
 		case 'SET_REPLIES':
+			console.log('setting replies');
 			return {
 				...state,
-				replies: {
+				replies: [
 					...action.payload,
-				}
+				]
 			};
 		case 'SET_BUBBLES':
+			console.log('setting bubbles');
 			return {
 				...state,
 				bubbles: [...action.payload]
@@ -166,11 +168,12 @@ export const reducer = (state: State, action: Action): State => {
 					...state.bubbles, action.payload
 				]
 			};
-		case 'ADD_REPLIES':
+		case 'ADD_REPLY':
+			console.log('adding reply');
 			return {
 				...state,
 				replies: [
-					...state.replies, ...action.payload
+					...state.replies, action.payload
 				]
 			};
 		case 'SET_TITLE':

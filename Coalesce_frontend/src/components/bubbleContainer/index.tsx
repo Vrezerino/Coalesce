@@ -12,7 +12,11 @@ function withHook(_Component: typeof BubbleContainer) {
 	};
 }
 
-class BubbleContainer extends React.Component<{ bubbles: PostType[] }> {
+interface Props {
+	bubbles: PostType[]
+}
+
+class BubbleContainer extends React.Component<Props> {
 	constructor(props: { bubbles: PostType[] }) {
 		super(props);
 	}

@@ -13,6 +13,7 @@ interface Props {
 const Replies = (props: Props) => {
 	const replyContainer = React.useRef<HTMLDivElement>(null);
 	const [{ currentBubble, replies }] = useStateValue();
+	console.log(replies, replies === null, replies?.length);
 
 	/* eslint-disable */
 	return ReactDOM.createPortal(
@@ -28,17 +29,15 @@ const Replies = (props: Props) => {
 						postNumber={currentBubble.postNumber}
 						admin={currentBubble.admin} title={currentBubble.title} />
 
-					{replies
-						? replies.map(r =>
-							<Post key={r.id}
-								id={r.id}
-								title={r.title}
-								poster={r.poster}
-								content={r.content}
-								date={r.date}
-								postNumber={r.postNumber}
-								admin={r.admin} />)
-						: null}
+					{replies?.map(r =>
+						<Post key={r.id}
+							id={r.id}
+							title={r.title}
+							poster={r.poster}
+							content={r.content}
+							date={r.date}
+							postNumber={r.postNumber}
+							admin={r.admin} />)}
 
 					<PostForm />
 				</>

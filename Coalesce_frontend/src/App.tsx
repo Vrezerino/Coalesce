@@ -6,7 +6,7 @@ import PostForm from './components/postForm';
 import { io } from 'socket.io-client';
 
 import { useStateValue } from './state';
-import { setBubbles, removeCurrentBubble, addBubble, addReplies } from './state';
+import { setBubbles, removeCurrentBubble, addBubble, addReply } from './state';
 
 const socket = io();
 
@@ -19,7 +19,7 @@ const App = () => {
 			dispatch(setBubbles(bubbles));
 		};
 		void fetchBubbles();
-	}, []);
+	}, [dispatch]);
 
 	socket.on('connect', () => {
 		//
@@ -33,7 +33,7 @@ const App = () => {
 		if (newPost.OP) {
 			dispatch(addBubble(newPost));
 		} else {
-			dispatch(addReplies(newPost));
+			dispatch(addReply(newPost));
 		}
 	});
 	/* eslint-enable */
