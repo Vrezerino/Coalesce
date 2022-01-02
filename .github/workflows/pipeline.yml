@@ -34,7 +34,7 @@ jobs:
             npx cypress cache path
             npm run cypress
           start: npm run start-prod
-          wait-on: http://localhost:3003
+          wait-on: http://localhost:3000
       - name: deploy
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: akhileshns/heroku-deploy@v3.12.12
