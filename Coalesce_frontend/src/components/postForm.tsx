@@ -8,14 +8,15 @@ import { setPoster, setTitle, setContent, setContentLength, setNotification } fr
 import axios, { AxiosError } from 'axios';
 
 const PostForm = () => {
-	const [{
-		poster,
-		content,
-		title,
-		contentLength,
-		notification,
-		currentBubble },
-	dispatch
+	const [
+		{
+			poster,
+			content,
+			title,
+			contentLength,
+			notification,
+			currentBubble },
+		dispatch
 	] = useStateValue();
 
 	const bubblePostNum = currentBubble != null
@@ -79,7 +80,9 @@ const PostForm = () => {
 						<tbody>
 							<tr>
 								<td>
-									<input value={poster}
+									<input
+										name='poster'
+										value={poster}
 										onChange={({ target }) =>
 											dispatch(setPoster(target.value))}
 										placeholder="Name (optional)" />
@@ -88,7 +91,9 @@ const PostForm = () => {
 							{bubblePostNum ? null :
 								<tr>
 									<td>
-										<input value={title}
+										<input
+											name='title'
+											value={title}
 											onChange={({ target }) =>
 												dispatch(setTitle(target.value))}
 											placeholder="Title (optional)" />
@@ -97,7 +102,9 @@ const PostForm = () => {
 							}
 							<tr>
 								<td>
-									<textarea autoFocus
+									<textarea
+										name='content'
+										autoFocus
 										className="content"
 										value={content}
 										onChange={({ target }) => {
@@ -117,7 +124,6 @@ const PostForm = () => {
 							<tr>
 								<td>
 									<input disabled accept='image/*' type='file' />
-
 								</td>
 							</tr>
 							<tr>

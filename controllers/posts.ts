@@ -1,8 +1,13 @@
-const postsRouter = require('express').Router();
+import * as express from 'express';
+const postsRouter = express.Router()
 const Post = require('../models/post');
 import * as config from '../utils/config';
 
 import { PostType, NewPostType } from '../types'
+
+postsRouter.get('/ping', async (_req, res) => {
+	res.json({ ping: 'pong!' });
+});
 
 postsRouter.get('/', async (
 	_req: any,
@@ -18,24 +23,7 @@ postsRouter.get('/', async (
 	}
 });
 
-postsRouter.get('/id/:postNumber', ( // Types largely inferred from usage in this file...
-	req: {
-		params: {
-			postNumber: string;
-		};
-	},
-	res: {
-		json: (arg0: any) => void;
-		status: (arg0: number) => {
-			(): any;
-			new(): any;
-			send: {
-				(arg0: string): void;
-				new(): any;
-			};
-		};
-	},
-	next: (arg0: any) => any) => {
+postsRouter.get('/id/:postNumber', (req, res, next) => {
 	Post.findOne({ postNumber: parseInt(req.params.postNumber) }).then((post: PostType) => {
 		if (post) {
 			res.json(post);
@@ -47,11 +35,7 @@ postsRouter.get('/id/:postNumber', ( // Types largely inferred from usage in thi
 });
 
 // Bubbles are thread starters a.k.a original posters. 
-postsRouter.get('/bubbles', async (
-	_req: any,
-	res: {
-		json: (arg0: any[]) => void;
-	}, next: (arg0: any) => void) => {
+postsRouter.get('/bubbles', async (_req, res, next) => {
 	try {
 		const allOPs = await Post.find({ OP: true }).exec();
 		res.json(allOPs.map((p: { toJSON: () => PostType; }) => p.toJSON()));
@@ -61,16 +45,7 @@ postsRouter.get('/bubbles', async (
 });
 
 // Get replies using an array of postnumbers.
-postsRouter.get('/replies', async (
-	req: {
-		query: {
-			array: any[];
-		};
-	},
-	res: {
-		json: (arg0: any[]) => void;
-	},
-	next: (arg0: any) => void) => {
+postsRouter.get('/replies', async (req: { query: { array: string[] } }, res, next) => {
 	try {
 		// Avoiding possible null reply postnumbers.
 		const array = req.query.array.flatMap(pnString => pnString == null
@@ -83,27 +58,7 @@ postsRouter.get('/replies', async (
 	}
 });
 
-postsRouter.post('/:postNumber', async (
-	req: {
-		body: NewPostType;
-		socket: {
-			remoteAddress: any;
-		};
-		params: {
-			postNumber: string;
-		};
-	},
-	res: {
-		status: (arg0: number) => {
-			(): any;
-			new(): any;
-			send: {
-				(arg0: string): void;
-				new(): any;
-			};
-		};
-	},
-	next: (arg0: any) => void) => {
+postsRouter.post('/:postNumber', async (req, res, next) => {
 	const postDate = new Date().toUTCString();
 	const post = new Post({
 		...req.body,
