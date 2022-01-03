@@ -30,8 +30,11 @@ jobs:
       - name: install client npm packages
         run: npm run install-client
 
-      - name: start client
-        run: npm run start-client
+      - name: build client
+        run: npm run build-client
+
+      - name: copypaste build folder
+        run: npm run copy-build-folder
 
       - name: e2e tests
         uses: cypress-io/github-action@v2
@@ -54,7 +57,7 @@ jobs:
           procfile: "web: node index.ts"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
-      
+
       - name: Bump version and push tag
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
