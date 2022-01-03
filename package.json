@@ -8,7 +8,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "NODE_ENV=production node index.ts",
+    "start": "NODE_ENV=production ts-node index.ts",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "dev": "cross-env NODE_ENV=development ts-node-dev index.ts",
     "lint": "node_modules/.bin/eslint .",
