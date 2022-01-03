@@ -1,20 +1,15 @@
 import * as express from 'express';
-const postsRouter = express.Router()
+const postsRouter = express.Router();
 const Post = require('../models/post');
 import * as config from '../utils/config';
 
-import { PostType, NewPostType } from '../types'
+import { PostType } from '../types';
 
 postsRouter.get('/ping', async (_req, res) => {
 	res.json({ ping: 'pong!' });
 });
 
-postsRouter.get('/', async (
-	_req: any,
-	res: {
-		json: (arg0: any) => void;
-	},
-	next: (arg0: any) => void) => {
+postsRouter.get('/', async (_req, res, next) => {
 	try {
 		const all = await Post.find({});
 		res.json(all.map((p: { toJSON: () => PostType; }) => p.toJSON()));
