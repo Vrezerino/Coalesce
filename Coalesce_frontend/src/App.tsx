@@ -22,7 +22,7 @@ const App = () => {
 	}, [dispatch]);
 
 	socket.on('connect', () => {
-		//////
+		//
 	});
 
 	/* eslint-disable */
