@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const app = require('./app').app;
 const mongoose = require('./app').mongoose;
-import http = require('http');
+const http = require('http');
 import * as config from './utils/config';
 import * as logger from './utils/logger';
 
