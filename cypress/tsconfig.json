@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-		"module": "commonjs",
     "target": "es6",
     "lib": ["es6", "dom"],
     "types": ["cypress"]
   },
-  "include": ["**/*.ts", "support/index.js", "plugins/index.js"]
+  "include": ["**/*.ts"]
 }
