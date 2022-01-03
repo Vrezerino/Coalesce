@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-exports = {};
 const app = require('./app').app;
 const mongoose = require('./app').mongoose;
 const http = require('http');
