@@ -12,4 +12,4 @@ export interface PostType {
 	replies: Array<number>;
 }
 
-export type NewPostType = Omit<PostType, 'id' | 'postNumber' | 'IP' | 'date' | 'admin'>
+export type NewPostType = Omit<PostType, 'id' | 'postNumber' | 'IP' | 'date' | 'admin'>;
