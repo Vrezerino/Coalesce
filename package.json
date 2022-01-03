@@ -10,7 +10,7 @@
     "start": "NODE_ENV=production node --loader ts-node/esm index.ts",
 		"start-client": "cd Coalesce_frontend && npm run start",
 		"build-client": "cd Coalesce_frontend && npm run build",
-		"copy-build-folder": "cd Coalesce_frontend && cp build ..",
+		"copy-build-folder": "cd Coalesce_frontend && cp -r build ..",
 		"install-client": "cd Coalesce_frontend && npm install",
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "dev": "NODE_ENV=development ts-node-dev index.ts",
