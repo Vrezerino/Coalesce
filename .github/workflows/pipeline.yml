@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
@@ -19,12 +20,19 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run lint
+
+      - name: install client npm packages
+        run: npm run install-client
+
       - name: start client
         run: npm run start-client
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
@@ -33,6 +41,7 @@ jobs:
             npm run cypress
           start: npm run start
           wait-on: http://localhost:3000
+
       - name: deploy
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -45,6 +54,7 @@ jobs:
           procfile: "web: node index.ts"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
+      
       - name: Bump version and push tag
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
