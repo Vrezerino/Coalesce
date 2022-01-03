@@ -1,6 +1,6 @@
 describe('Coalesce', () => {
 	it('Front page can be opened', () => {
-		cy.visit('http://localhost:3000');
+		cy.visit('http://localhost:3001');
 
 		cy.contains('Post bubble');
 	});
