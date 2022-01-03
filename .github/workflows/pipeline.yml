@@ -43,7 +43,7 @@ jobs:
             npx cypress cache path
             npm run cypress
           start: npm run start
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:3001
 
       - name: deploy
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
