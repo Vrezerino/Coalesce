@@ -1,12 +1,12 @@
-import config = require('./utils/config');
-import express = require('express');
+const config = require('./utils/config');
+const express = require('express');
 const app = express();
 //const morgan = require('morgan');
-import cors = require('cors');
+const cors = require('cors');
 const postsRouter = require('./controllers/posts');
-import middleware = require('./utils/middleware');
-import logger = require('./utils/logger');
-import mongoose = require('mongoose');
+const middleware = require('./utils/middleware');
+const logger = require('./utils/logger');
+const mongoose = require('mongoose');
 mongoose.set('debug', true);
 
 logger.info('Connecting to', config.DB_URI!);
