@@ -1,9 +1,9 @@
 import * as express from 'express';
-const postsRouter = express.Router()
+const postsRouter = express.Router();
 const Post = require('../models/post');
 import * as config from '../utils/config';
 
-import { PostType } from '../types'
+import { PostType } from '../types';
 
 postsRouter.get('/ping', async (_req, res) => {
 	res.json({ ping: 'pong!' });
