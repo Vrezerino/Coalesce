@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const app = require('./app').app;
 const mongoose = require('./app').mongoose;
-const http = require('http');
+import http = require('http');
 import * as config from './utils/config';
 import * as logger from './utils/logger';
 
@@ -10,7 +10,7 @@ const server = http.createServer(app);
 import { Server } from 'socket.io';
 const io = new Server(server);
 
-import { PostType, NewPostType } from './types';
+import { PostType } from './types';
 
 db.once('open', () => {
 	server.listen(config.PORT, () => 
