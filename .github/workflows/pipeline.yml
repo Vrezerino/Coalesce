@@ -39,9 +39,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
-          run: | 
-            npx cypress cache path
-            npm run cypress
+          run: npm run cypress
           start: npm run start
           wait-on: http://localhost:3001
 
