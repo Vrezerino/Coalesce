@@ -16,7 +16,7 @@
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "dev": "NODE_ENV=development ts-node-dev index.ts",
     "lint": "node_modules/.bin/eslint .",
-    "cypress": "cypress open"
+    "cypress": "cypress open --browser chrome"
   },
   "author": "vres",
   "license": "ISC",
