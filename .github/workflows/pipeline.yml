@@ -14,15 +14,15 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_MESSAGES_STRING: join(env.COMMIT_MESSAGES)
-        run: echo "$COMMIT_MESSAGES"
+          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
+        run: echo env.COMMIT_MESSAGES
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
       - name: npm install
         run: npm install
       - name: lint
-        run: npm run eslint
+        run: npm run lint
       - name: build
         run: npm run build
       - name: test
@@ -34,7 +34,7 @@ jobs:
             npx cypress cache path
             npm run cypress
           start: npm run start-prod
-          wait-on: http://localhost:3003
+          wait-on: http://localhost:3000
       - name: deploy
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: akhileshns/heroku-deploy@v3.12.12
