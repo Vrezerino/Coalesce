@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   repository_dispatch:
-    types: [trigger-workflow-2]
+    types: [test_and_build]
 
 jobs:
   test_and_build:

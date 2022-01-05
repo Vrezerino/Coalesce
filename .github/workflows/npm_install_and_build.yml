@@ -33,5 +33,5 @@ jobs:
         with:
           token: ${{ secrets.COALESCE_PIPELINE_SECRET }}
           repository: ${{ github.repository }}
-          event-type: trigger-workflow-2
+          event-type: test_and_build
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
