@@ -16,10 +16,10 @@ jobs:
         uses: cypress-io/github-action@v2
         timeout-minutes: 5
         with:
-          browser: electron
+          browser: chrome
           run: npm run cypress
           start: npm run start
-          wait-on: "http://localhost:3001"
+          wait-on: "http://localhost:3001", "http://localhost:3000", "http://localhost:3003"
           wait-on-timeout: 180
 
       - name: deploy
