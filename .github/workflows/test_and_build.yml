@@ -19,8 +19,8 @@ jobs:
           browser: chrome
           run: npm run cypress
           start: npm run start
-          wait-on: "http://localhost:3001", "http://localhost:3000", "http://localhost:3003"
-          wait-on-timeout: 180
+          wait-on: "http://localhost:3001"
+          wait-on-timeout: 30
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
