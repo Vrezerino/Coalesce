@@ -6,7 +6,7 @@ on:
     types: [closed]
 
 jobs:
-  simple_deployment_pipeline:
+  npm_install_and_build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-18.04
     steps:
@@ -31,7 +31,7 @@ jobs:
         if: success()
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.REPO_GHA_PAT }}
+          token: ${{ secrets.COALESCE_PIPELINE_SECRET }}
           repository: ${{ github.repository }}
           event-type: trigger-workflow-2
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

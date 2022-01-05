@@ -5,7 +5,7 @@ on:
     types: [trigger-workflow-2]
 
 jobs:
-  simple_deployment_pipeline:
+  test_and_build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-18.04
     steps:
