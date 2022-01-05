@@ -21,7 +21,7 @@ jobs:
           run: npm run cypress
           start: npm run start
           wait-on: "http://localhost:3001"
-          wait-on-timeout: 30
+          wait-on-timeout: 180
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
