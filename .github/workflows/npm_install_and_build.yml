@@ -1,0 +1,37 @@
+name: Install npm packages and build
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  simple_deployment_pipeline:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: npm install
+        run: npm install
+
+      - name: lint
+        run: npm run lint
+
+      - name: install client npm packages
+        run: npm run install-client
+
+      - name: build client
+        run: npm run build-client
+
+      - name: copypaste build folder
+        run: npm run copy-build-folder
+
+      - name: Trigger next workflow
+        if: success()
+        uses: peter-evans/repository-dispatch@v1
+         with:
+          token: ${{ secrets.REPO_GHA_PAT }}
+          repository: ${{ github.repository }}
+          event-type: trigger-workflow-2
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

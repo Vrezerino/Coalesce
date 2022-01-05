@@ -1,9 +1,8 @@
 name: Deployment
 
 on:
-  pull_request:
-    branches: [main]
-    types: [closed]
+  repository_dispatch:
+    types: [trigger-workflow-2]
 
 jobs:
   simple_deployment_pipeline:
@@ -11,30 +10,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
-        run: echo env.COMMIT_MESSAGES
-      - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-
-      - name: npm install
-        run: npm install
-
-      - name: lint
-        run: npm run lint
-
-      - name: install client npm packages
-        run: npm run install-client
-
-      - name: build client
-        run: npm run build-client
-
-      - name: copypaste build folder
-        run: npm run copy-build-folder
+          ref: ${{ github.event.client_payload.sha }}
 
       - name: e2e tests
         uses: cypress-io/github-action@v2
@@ -45,6 +22,15 @@ jobs:
           start: npm run start
           wait-on: http://localhost:3001
           wait-on-timeout: 30
+
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES_STRING: ${{ join(env.COMMIT_MESSAGES) }}
+        run: echo env.COMMIT_MESSAGES
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'    
 
       - name: deploy
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
