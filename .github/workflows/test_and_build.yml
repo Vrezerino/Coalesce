@@ -16,11 +16,11 @@ jobs:
         uses: cypress-io/github-action@v2
         timeout-minutes: 5
         with:
-          browser: chrome
+          browser: edge
           run: npm run cypress
           start: npm run start
-          wait-on: http://localhost:3001
-          wait-on-timeout: 30 
+          wait-on: "http://localhost:3001"
+          wait-on-timeout: 30
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
