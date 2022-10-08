@@ -12,4 +12,5 @@ export interface PostType {
 	replies: Array<number>;
 }
 
+export type PublicPostType = Omit<PostType, 'IP'>;
 export type NewPostType = Omit<PostType, 'id' | 'postNumber' | 'IP' | 'date' | 'admin'>;

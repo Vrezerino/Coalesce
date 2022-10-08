@@ -1,7 +1,7 @@
 import React from 'react';
 import Bubble from './bubble';
 import './bubbleContainer.css';
-import { PostType } from '../../types';
+import { PublicPostType } from '../../types';
 
 import { useStateValue } from '../../state';
 
@@ -13,14 +13,14 @@ function withHook(_Component: typeof BubbleContainer) {
 }
 
 interface Props {
-	bubbles: PostType[]
+	bubbles: PublicPostType[]
 }
 
 class BubbleContainer extends React.Component<Props> {
-	constructor(props: { bubbles: PostType[] }) {
+	constructor(props: { bubbles: PublicPostType[] }) {
 		super(props);
 	}
-	shouldComponentUpdate(nextProps: { bubbles: PostType[]; }): boolean {
+	shouldComponentUpdate(nextProps: { bubbles: PublicPostType[]; }): boolean {
 		console.log(this.props.bubbles);
 		console.log(nextProps.bubbles);
 		return (this.props.bubbles !== (nextProps.bubbles));
@@ -30,7 +30,7 @@ class BubbleContainer extends React.Component<Props> {
 		const bubbles = this.props.bubbles;
 		return (
 			<div className="bubbles">
-				{bubbles?.map((b: PostType, index: number) =>
+				{bubbles?.map((b: PublicPostType, index: number) =>
 					<Bubble wait={(index + 1) * 35}
 						key={b.id}
 						title={b.title}

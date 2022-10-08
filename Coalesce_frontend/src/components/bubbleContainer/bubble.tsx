@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import postService from '../../services/postService';
 import './bubble.css';
-import { PostType } from '../../types';
+import { PublicPostType } from '../../types';
 //const pop = require('../utils/pop').sound
 
 import { useStateValue } from '../../state';
 import { setCurrentBubble, setReplies, setNotification } from '../../state';
 
 interface Props {
-	bubbleObj: PostType;
+	bubbleObj: PublicPostType;
 	wait: number;
 	postNumber: number;
 	replyPostNumbers: number[];

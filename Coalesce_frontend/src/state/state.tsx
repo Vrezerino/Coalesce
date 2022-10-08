@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { PostType } from '../types';
+import { PublicPostType } from '../types';
 import { Action } from './reducer';
 import { Socket } from '../../node_modules/socket.io-client/build/socket';
 
 export type State = {
-	currentBubble: PostType | null
-	bubbles: PostType[]
-	replies: PostType[]
+	currentBubble: PublicPostType | null
+	bubbles: PublicPostType[]
+	replies: PublicPostType[]
 	title: string
 	poster: string
 	content: string

@@ -1,30 +1,30 @@
 import { State } from './state';
-import { PostType } from '../types';
+import { PublicPostType } from '../types';
 import { Socket } from '../../node_modules/socket.io-client/build/socket';
 
 export type Action =
 	| {
 		type: 'SET_CURRENT_BUBBLE';
-		payload: PostType;
+		payload: PublicPostType;
 	}
 	| {
 		type: 'REMOVE_CURRENT_BUBBLE';
 	}
 	| {
 		type: 'SET_BUBBLES';
-		payload: PostType[];
+		payload: PublicPostType[];
 	}
 	| {
 		type: 'ADD_BUBBLE';
-		payload: PostType;
+		payload: PublicPostType;
 	}
 	| {
 		type: 'SET_REPLIES';
-		payload: PostType[];
+		payload: PublicPostType[];
 	}
 	| {
 		type: 'ADD_REPLY';
-		payload: PostType;
+		payload: PublicPostType;
 	}
 	| {
 		type: 'SET_TITLE';
@@ -51,7 +51,7 @@ export type Action =
 		payload: Socket
 	};
 
-export const setCurrentBubble = (bubble: PostType) => {
+export const setCurrentBubble = (bubble: PublicPostType) => {
 	return {
 		type: 'SET_CURRENT_BUBBLE',
 		payload: bubble
@@ -64,28 +64,28 @@ export const removeCurrentBubble = () => {
 	} as Action;
 };
 
-export const setBubbles = (bubbles: PostType[]) => {
+export const setBubbles = (bubbles: PublicPostType[]) => {
 	return {
 		type: 'SET_BUBBLES',
 		payload: bubbles
 	} as Action;
 };
 
-export const addBubble = (bubble: PostType) => {
+export const addBubble = (bubble: PublicPostType) => {
 	return {
 		type: 'ADD_BUBBLE',
 		payload: bubble
 	} as Action;
 };
 
-export const setReplies = (replies: PostType[]) => {
+export const setReplies = (replies: PublicPostType[]) => {
 	return {
 		type: 'SET_REPLIES',
 		payload: replies
 	} as Action;
 };
 
-export const addReply = (reply: PostType) => {
+export const addReply = (reply: PublicPostType) => {
 	return {
 		type: 'ADD_REPLY',
 		payload: reply
